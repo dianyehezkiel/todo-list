@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .todo-container {
+    @apply w-full max-w-screen-lg p-5 lg:p-3 mx-auto;
+  }
+}
