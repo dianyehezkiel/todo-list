@@ -16,13 +16,7 @@ import {
 import { useGlobalState } from '../../reducer';
 import { setActivityTitle, setTodos } from '../../reducer/reducer';
 
-interface ActivityDetailProps {
-  titleProps: string;
-}
-
-export default function ActivityDetail({
-  titleProps,
-}: ActivityDetailProps) {
+export default function ActivityDetail() {
   const [{ todos, activityTitle }, dispatch] = useGlobalState();
   const [showAddModal, setShowAddModal] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -66,7 +60,7 @@ export default function ActivityDetail({
                 />
               </svg>
             </button>
-            <EditableText text={activityTitle??titleProps} activityId={Number(router.query.id as string)} />
+            <EditableText text={activityTitle??(router.query.title as string)} activityId={Number(router.query.id as string)} />
           </div>
           <div className='flex gap-2 items-center'>
           <SortButton />
