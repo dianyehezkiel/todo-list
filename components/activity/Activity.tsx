@@ -31,7 +31,7 @@ export default function Activity({
 
   return (
     <>
-      <div
+      <a
         data-cy="activity-item"
         onClick={onClick}
         className="card col-span-1 aspect-square p-4 md:p-6 justify-between shadow-[0_6px_10px_0px_rgba(0,0,0,0.15)] rounded-xl hover:cursor-pointer lg:transition-transform lg:hover:scale-105"
@@ -73,7 +73,7 @@ export default function Activity({
             </svg>
           </button>
         </div>
-      </div>
+      </a>
       <DeleteModal
         type="Activity"
         show={showModal}
