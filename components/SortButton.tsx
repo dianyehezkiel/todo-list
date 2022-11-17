@@ -91,31 +91,31 @@ export default function SortButton() {
         className="dropdown-content menu p-1 shadow bg-base-100 rounded-box w-52"
       >
         <li>
-          <div data-cy='sort-latest' onClick={() => dispatch(setSort(ESortType.NEWEST))} className="flex items-center">
+          <div data-cy='sort-selection' onClick={() => dispatch(setSort(ESortType.NEWEST))} className="flex items-center">
             {SortIcon(ESortType.NEWEST)}
             <p className="text-sm">Terbaru</p>
           </div>
         </li>
         <li>
-          <div data-cy='sort-oldest' onClick={() => dispatch(setSort(ESortType.OLDEST))} className="flex items-center">
+          <div data-cy='sort-selection' onClick={() => dispatch(setSort(ESortType.OLDEST))} className="flex items-center">
             {SortIcon(ESortType.OLDEST)}
             <p className="text-sm">Terlama</p>
           </div>
         </li>
         <li>
-          <div data-cy='sort-az' onClick={() => dispatch(setSort(ESortType.AZ))} className="flex items-center">
+          <div data-cy='sort-selection' onClick={() => dispatch(setSort(ESortType.AZ))} className="flex items-center">
             {SortIcon(ESortType.AZ)}
             <p className="text-sm">A-Z</p>
           </div>
         </li>
         <li>
-          <div data-cy='sort-za' onClick={() => dispatch(setSort(ESortType.ZA))} className="flex items-center">
+          <div data-cy='sort-selection' onClick={() => dispatch(setSort(ESortType.ZA))} className="flex items-center">
             {SortIcon(ESortType.ZA)}
             <p className="text-sm">Z-A</p>
           </div>
         </li>
         <li>
-          <div data-cy='sort-unfinished' onClick={() => dispatch(setSort(ESortType.ACTIVE))} className="flex items-center">
+          <div data-cy='sort-selection' onClick={() => dispatch(setSort(ESortType.ACTIVE))} className="flex items-center">
             {SortIcon(ESortType.ACTIVE)}
             <p className="text-sm">Belum Selesai</p>
           </div>
