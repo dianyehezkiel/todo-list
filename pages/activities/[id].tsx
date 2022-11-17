@@ -17,27 +17,10 @@ import { useGlobalState } from '../../reducer';
 import { setActivityTitle, setTodos } from '../../reducer/reducer';
 
 interface ActivityDetailProps {
-  todosProps: ITodo[];
   titleProps: string;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query;
-
-  const { data: activity } = await axios.get<IActivityTodos>(
-    `https://todo.api.devcode.gethired.id/activity-groups/${id}`,
-  );
-
-  return {
-    props: {
-      todosProps: activity.todo_items,
-      titleProps: activity.title,
-    },
-  };
-};
-
 export default function ActivityDetail({
-  todosProps,
   titleProps,
 }: ActivityDetailProps) {
   const [{ todos, activityTitle }, dispatch] = useGlobalState();
@@ -45,9 +28,18 @@ export default function ActivityDetail({
   const [showAlert, setShowAlert] = useState(false);
   const router = useRouter();
   useEffect(() => {
-    dispatch(setTodos(todosProps));
-    dispatch(setActivityTitle(titleProps));
-  }, [dispatch, todosProps, titleProps]);
+    const fetchData =async () => {
+      const { id } = router.query;
+
+      const { data: activity } = await axios.get<IActivityTodos>(
+        `https://todo.api.devcode.gethired.id/activity-groups/${id}`,
+      );
+      dispatch(setTodos(activity.todo_items));
+      dispatch(setActivityTitle(activity.title));
+    }
+
+    fetchData();
+  }, [dispatch, router])
 
   return (
     <>

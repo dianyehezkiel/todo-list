@@ -14,33 +14,27 @@ import {
 import { EMAIL, NEW_ACTIVITY } from '../lib/constant';
 import Alert from '../components/Alert';
 
-interface HomeProps {
-  activitiesProps: IActivity[];
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const params = {
-    email: EMAIL,
-  };
-  const { data: activities } = await axios.get<IActivities>(
-    'https://todo.api.devcode.gethired.id/activity-groups',
-    { params },
-  );
-
-  return {
-    props: {
-      activitiesProps: activities.data,
-    },
-  };
-};
-
-export default function Home({ activitiesProps }: HomeProps) {
+export default function Home() {
   const [{ activities }, dispatch] = useGlobalState();
   const [showAlert, setShowAlert] = useState(false);
   useEffect(() => {
-    dispatch(setActivities(activitiesProps));
+    const fetchData = async () => {
+      const params = {
+        email: EMAIL,
+      };
+      const { data: activities } = await axios.get<IActivities>(
+        'https://todo.api.devcode.gethired.id/activity-groups',
+        { params },
+      );
+
+      dispatch(setActivities(activities.data))
+    }
+
+    fetchData();
+  }, [dispatch])
+  useEffect(() => {
     dispatch(removeActivityTitle());
-  }, [dispatch, activitiesProps]);
+  }, [dispatch]);
 
   const handleAddActivity = async () => {
     const body = {
