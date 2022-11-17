@@ -84,7 +84,7 @@ export default function AddTodoModal({
   };
 
   return show ? (
-    <div className="fixed inset-0 backdrop-blur-sm flex justify-center items-center p-4 z-20">
+    <div onClick={onClose} className="fixed inset-0 backdrop-blur-sm flex justify-center items-center p-4 z-20">
       <div
         data-cy="modal-add"
         className="w-full max-w-xs md:max-w-lg lg:max-w-[52rem] flex flex-col shadow-[0_6px_10px_0px_rgba(0,0,0,0.15)] bg-base-100 rounded-xl"
