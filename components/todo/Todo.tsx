@@ -66,7 +66,7 @@ export default function Todo({ todo, onDelete }: { todo: ITodo, onDelete: () => 
           className="checkbox checkbox-primary border-primary-black peer"
         />
         <div className={`w-2 h-2 rounded-full ${bgColor(todo.priority)}`}></div>
-        <p className="flex-grow text-sm md:text-base lg:text-lg font-bold peer-checked:text-secondary-black peer-checked:line-through leading-none">
+        <p data-cy='todo-item-title' className="flex-grow text-sm md:text-base lg:text-lg font-bold peer-checked:text-secondary-black peer-checked:line-through leading-none">
           {todo.title}
         </p>
         <div className="flex gap-2 items-center">
