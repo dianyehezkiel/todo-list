@@ -3,7 +3,7 @@ import { EActionType, IAction, IActivity, IState, ITodo } from '../lib/types';
 
 export const initialState: IState = {
   activities: [],
-  activityId: undefined,
+  activityTitle: undefined,
   todos: [],
 };
 
@@ -16,7 +16,7 @@ export const reducer: Reducer<IState, IAction> = (state, action) => {
         ...state,
         activities: payload,
       };
-    case EActionType.SET_ACTIVITY_ID:
+    case EActionType.SET_ACTIVITY_TITLE:
       return {
         ...state,
         activityId: payload,
@@ -62,6 +62,11 @@ export const reducer: Reducer<IState, IAction> = (state, action) => {
         ...state,
         todos: state.todos.filter((todo) => todo.id !== payload),
       };
+    case EActionType.REMOVE_ACTIVITY_TITLE:
+      return {
+        ...state,
+        activityTitle: undefined,
+      }
     default:
       return state;
   }
@@ -74,9 +79,9 @@ export const setActivities = (activities: IActivity[]): IAction => {
   };
 };
 
-export const setActivityId = (activityId: number): IAction => {
+export const setActivityId = (activityId: string): IAction => {
   return {
-    type: EActionType.SET_ACTIVITY_ID,
+    type: EActionType.SET_ACTIVITY_TITLE,
     payload: activityId,
   };
 };
@@ -129,3 +134,10 @@ export const deleteTodo = (todoId: number): IAction => {
     payload: todoId,
   };
 };
+
+export const removeActivityTitle = (): IAction => {
+  return {
+    type: EActionType.REMOVE_ACTIVITY_TITLE,
+    payload: undefined
+  }
+}

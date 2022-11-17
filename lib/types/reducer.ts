@@ -2,13 +2,13 @@ import { IActivity, ITodo } from './responses';
 
 export interface IState {
   activities: IActivity[];
-  activityId?: number;
+  activityTitle?: string;
   todos: ITodo[];
 }
 
 export enum EActionType {
   SET_ACTIVITIES = 'SET_ACTIVITIES',
-  SET_ACTIVITY_ID = 'SET_ACTIVITY_ID',
+  SET_ACTIVITY_TITLE = 'SET_ACTIVITY_TITLE',
   SET_TODOS = 'SET_TODOS',
   ADD_ACTIVITY = 'ADD_ACTIVITY',
   ADD_TODO = 'ADD_TODO',
@@ -16,6 +16,7 @@ export enum EActionType {
   UPDATE_TODO = 'UPDATE_TODO',
   DELETE_ACTIVITY = 'DELETE_ACTIVITY',
   DELETE_TODO = 'DELETE_TODO',
+  REMOVE_ACTIVITY_TITLE = 'REMOVE_ACTIVITY_TITLE',
 }
 
 export type IAction =
@@ -24,8 +25,8 @@ export type IAction =
       payload: IActivity[];
     }
   | {
-      type: EActionType.SET_ACTIVITY_ID;
-      payload: number;
+      type: EActionType.SET_ACTIVITY_TITLE;
+      payload: string;
     }
   | {
       type: EActionType.SET_TODOS;
@@ -54,4 +55,8 @@ export type IAction =
   | {
       type: EActionType.DELETE_TODO;
       payload: number;
+    }
+  | {
+      type: EActionType.REMOVE_ACTIVITY_TITLE;
+      payload: undefined;
     };
