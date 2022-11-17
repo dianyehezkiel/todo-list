@@ -86,6 +86,7 @@ export default function AddTodoModal({
   return show ? (
     <div onClick={onClose} className="fixed inset-0 backdrop-blur-sm flex justify-center items-center p-4 z-20">
       <div
+        onClick={(e) => e.stopPropagation()}
         data-cy="modal-add"
         className="w-full max-w-xs md:max-w-lg lg:max-w-[52rem] flex flex-col shadow-[0_6px_10px_0px_rgba(0,0,0,0.15)] bg-base-100 rounded-xl"
       >
@@ -183,13 +184,6 @@ export default function AddTodoModal({
                 </li>
               </ul>
             </div>
-            {/* <select data-cy='modal-add-priority-dropdown' defaultValue={priority} onChange={(e) => setPriority(e.target.value)} className="select select-bordered">
-              <option data-cy='modal-add-priority-item' value={EPriorityType.VERY_HIGH}>Very High</option>
-              <option data-cy='modal-add-priority-item' value={EPriorityType.HIGH}>High</option>
-              <option data-cy='modal-add-priority-item' value={EPriorityType.NORMAL}>Normal</option>
-              <option data-cy='modal-add-priority-item' value={EPriorityType.LOW}>Low</option>
-              <option data-cy='modal-add-priority-item' value={EPriorityType.VERY_LOW}>Very Low</option>
-            </select> */}
           </div>
         </div>
         <div className="flex justify-end items-center px-6 md:px-7 py-4 border-t border-t-secondary-black">
