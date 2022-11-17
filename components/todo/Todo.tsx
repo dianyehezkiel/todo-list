@@ -58,6 +58,7 @@ export default function Todo({ todo, onDelete }: { todo: ITodo, onDelete: () => 
     <>
       <div data-cy='todo-item' className="w-full flex justify-start items-center gap-3 md:gap-4 shadow-[0_6px_10px_0px_rgba(0,0,0,0.15)] rounded-xl p-4">
         <input
+          data-cy='todo-item-checkbox'
           onChange={() => handleUpdateActive()}
           checked={!isActive}
           type="checkbox"
@@ -89,8 +90,8 @@ export default function Todo({ todo, onDelete }: { todo: ITodo, onDelete: () => 
             </svg>
           </button>
           <button
+            data-cy='todo-item-delete-button'
             onClick={() => setShowDeleteModal(true)}
-            data-cy="activity-item-delete-button"
             className="btn btn-square btn-sm btn-ghost hover:bg-error/75 text-secondary-black hover:text-error-content"
           >
             <svg

@@ -95,6 +95,7 @@ export default function AddTodoModal({
               <span className="label-text font-semibold uppercase text-xs md:text-sm">Nama List Item</span>
             </label>
             <input
+              data-cy='modal-add-name-input'
               defaultValue={title}
               onChange={(e) => setTitle(e.target.value)}
               type="text"
@@ -102,17 +103,28 @@ export default function AddTodoModal({
               className="input input-bordered w-full"
             />
           </div>
+          
           <div className="form-control w-full">
             <label className="label">
               <span className="label-text font-semibold uppercase text-xs md:text-sm">Priority</span>
             </label>
-            <select data-cy='modal-add-priority-dropdown' defaultValue={priority} onChange={(e) => setPriority(e.target.value)} className="select select-bordered">
+            <div className="dropdown w-full max-w-xs">
+            <label tabIndex={0} className="btn m-1 w-full max-w-xs justify-start btn-ghost border border-secondary-black">{priority}</label>
+            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full max-w-xs">
+              <li onClick={() => setPriority('very-high')}><a>Very-High</a></li>
+              <li onClick={() => setPriority('high')}><a>High</a></li>
+              <li onClick={() => setPriority('normal')}><a>Normal</a></li>
+              <li onClick={() => setPriority('low')}><a>Low</a></li>
+              <li onClick={() => setPriority('very-low')}><a>Very-Low</a></li>
+            </ul>
+          </div>
+            {/* <select data-cy='modal-add-priority-dropdown' defaultValue={priority} onChange={(e) => setPriority(e.target.value)} className="select select-bordered">
               <option data-cy='modal-add-priority-item' value={EPriorityType.VERY_HIGH}>Very High</option>
               <option data-cy='modal-add-priority-item' value={EPriorityType.HIGH}>High</option>
               <option data-cy='modal-add-priority-item' value={EPriorityType.NORMAL}>Normal</option>
               <option data-cy='modal-add-priority-item' value={EPriorityType.LOW}>Low</option>
               <option data-cy='modal-add-priority-item' value={EPriorityType.VERY_LOW}>Very Low</option>
-            </select>
+            </select> */}
           </div>
         </div>
         <div className="flex justify-end items-center px-6 md:px-7 py-4 border-t border-t-secondary-black">
