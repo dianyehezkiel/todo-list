@@ -1,15 +1,25 @@
 import { IActivity, ITodo } from './responses';
 
+export enum ESortType {
+  NEWEST,
+  OLDEST,
+  AZ,
+  ZA,
+  ACTIVE,
+}
+
 export interface IState {
   activities: IActivity[];
   activityTitle?: string;
   todos: ITodo[];
+  sort: ESortType
 }
 
 export enum EActionType {
   SET_ACTIVITIES = 'SET_ACTIVITIES',
   SET_ACTIVITY_TITLE = 'SET_ACTIVITY_TITLE',
   SET_TODOS = 'SET_TODOS',
+  SET_SORT = 'SET_SORT',
   ADD_ACTIVITY = 'ADD_ACTIVITY',
   ADD_TODO = 'ADD_TODO',
   UPDATE_ACTIVITY = 'UPDATE_ACTIVITY',
@@ -59,4 +69,8 @@ export type IAction =
   | {
       type: EActionType.REMOVE_ACTIVITY_TITLE;
       payload: undefined;
-    };
+    }
+  | {
+    type: EActionType.SET_SORT;
+    payload: ESortType
+  };

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import activityEmptyBg from '../public/activity-empty-bg.png';
+import activityEmptyBg from '../../public/activity-empty-bg.png';
 
 export default function ActivityEmptyState() {
   return (

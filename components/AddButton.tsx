@@ -1,11 +1,12 @@
 interface AddButtonProps {
   onClick?: () => void;
+  dataCy: string;
 }
 
-export default function AddButton({ onClick }: AddButtonProps) {
+export default function AddButton({ onClick, dataCy }: AddButtonProps) {
   return (
     <button
-      data-cy="activity-add-button"
+      data-cy={dataCy}
       onClick={onClick}
       className="btn h-9 min-h-[2.25rem] md:h-12 md:min-h-12 lg:h-14 lg:min-h-[3.5rem] lg:px-5 btn-primary rounded-full gap-1 capitalize"
     >

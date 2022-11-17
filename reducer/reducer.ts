@@ -1,10 +1,11 @@
 import { Reducer } from 'react';
-import { EActionType, IAction, IActivity, IState, ITodo } from '../lib/types';
+import { EActionType, ESortType, IAction, IActivity, IState, ITodo } from '../lib/types';
 
 export const initialState: IState = {
   activities: [],
   activityTitle: undefined,
   todos: [],
+  sort: ESortType.ACTIVE,
 };
 
 export const reducer: Reducer<IState, IAction> = (state, action) => {
@@ -19,7 +20,7 @@ export const reducer: Reducer<IState, IAction> = (state, action) => {
     case EActionType.SET_ACTIVITY_TITLE:
       return {
         ...state,
-        activityId: payload,
+        activityTitle: payload,
       };
     case EActionType.SET_TODOS:
       return {
@@ -66,6 +67,11 @@ export const reducer: Reducer<IState, IAction> = (state, action) => {
       return {
         ...state,
         activityTitle: undefined,
+      }
+    case EActionType.SET_SORT:
+      return {
+        ...state,
+        sort: payload
       }
     default:
       return state;
@@ -139,5 +145,12 @@ export const removeActivityTitle = (): IAction => {
   return {
     type: EActionType.REMOVE_ACTIVITY_TITLE,
     payload: undefined
+  }
+}
+
+export const setSort = (sortType: ESortType): IAction => {
+  return {
+    type: EActionType.SET_SORT,
+    payload: sortType,
   }
 }
