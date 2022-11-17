@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { BASE_URL } from '../../lib/constant';
 import { EPriorityType, INewTodo, ITodo } from '../../lib/types';
 import { useGlobalState } from '../../reducer';
 import { deleteTodo, updateTodo } from '../../reducer/reducer';
@@ -30,7 +31,7 @@ export default function Todo({ todo, onDelete }: { todo: ITodo, onDelete: () => 
   };
 
   const handleDeleteTodo = async () => {
-    const { status } = await axios.delete(`/api/todos/${todo.id}`);
+    const { status } = await axios.delete(`${BASE_URL}/todo-items/${todo.id}`);
     if (status === 200) {
       dispatch(deleteTodo(todo.id));
       setShowDeleteModal(false);
@@ -43,7 +44,7 @@ export default function Todo({ todo, onDelete }: { todo: ITodo, onDelete: () => 
       is_active: !isActive,
     }
 
-    const { data: updatedTodo, status } = await axios.patch<INewTodo>(`/api/todos/${todo.id}`, body);
+    const { data: updatedTodo, status } = await axios.patch<INewTodo>(`${BASE_URL}/todo-items/${todo.id}`, body);
 
     if (status === 200) {
       const { id, title, activity_group_id, is_active: isActiveRes, priority } = updatedTodo;

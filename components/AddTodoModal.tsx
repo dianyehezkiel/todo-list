@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { BASE_URL } from '../lib/constant';
 import { EPriorityType, INewTodo } from '../lib/types';
 import { useGlobalState } from '../reducer';
 import { addTodo, updateTodo } from '../reducer/reducer';
@@ -32,13 +33,15 @@ export default function AddTodoModal({
       priority,
     }
 
-    const { data: newTodo, status } = await axios.post<INewTodo>('/api/todos', body);
+    const { data: newTodo, status } = await axios.post<INewTodo>(`${BASE_URL}/todo-items`, body);
 
     if (status === 201) {
       const { id, title, activity_group_id, is_active: isActive, priority } = newTodo;
       const is_active = isActive ? 1 : 0;
       dispatch(addTodo({ id, title, activity_group_id, is_active, priority }));
       onClose();
+      setPriority("very-high");
+      setTitle("")
     }
   };
 
@@ -48,7 +51,7 @@ export default function AddTodoModal({
       priority,
     }
 
-    const { data: updatedTodo, status } = await axios.patch<INewTodo>(`/api/todos/${todoId}`, body);
+    const { data: updatedTodo, status } = await axios.patch<INewTodo>(`${BASE_URL}/todo-items/${todoId}`, body);
 
     if (status === 200) {
       const { id, title, activity_group_id, is_active: isActive, priority } = updatedTodo;

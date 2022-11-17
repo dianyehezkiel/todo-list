@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { BASE_URL } from '../lib/constant';
 import { INewActivity } from '../lib/types';
 import { useGlobalState } from '../reducer';
 import { updateActivity } from '../reducer/reducer';
@@ -21,7 +22,7 @@ export default function EditableText({
     };
 
     const { data: updatedActivity, status } = await axios.patch<INewActivity>(
-      `/api/activities/${activityId}`,
+      `${BASE_URL}/activity-groups/${activityId}`,
       body,
     );
 
@@ -39,7 +40,7 @@ export default function EditableText({
           data-cy='todo-title'
           autoFocus={isFocus}
           onBlur={() => {
-            if (txtState !== text) handleUpdateActive();
+            if (txtState !== text) {handleUpdateActive()} else {setIsFocus(false)};
           }}
           className="input input-sm md:input-md w-full flex-grow p-0.5 text-base"
           type="text"
@@ -48,6 +49,7 @@ export default function EditableText({
         />
       ) : (
         <h2
+          onClick={() => setIsFocus(true)}
           data-cy="todo-title"
           className="font-bold md:text-2xl lg:text-4xl w-full flex-grow"
         >

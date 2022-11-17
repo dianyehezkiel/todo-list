@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { GetServerSideProps } from 'next';
 import ActivityEmptyState from '../components/activity/ActivityEmptyState';
 import AddButton from '../components/AddButton';
-import { IActivities, IActivity, INewActivity } from '../lib/types';
+import { IActivities, INewActivity } from '../lib/types';
 import Activities from '../components/activity/Activities';
 import { useGlobalState } from '../reducer';
 import { useEffect, useState } from 'react';
@@ -43,11 +42,11 @@ export default function Home() {
     };
 
     const { data: newActivity, status } = await axios.post<INewActivity>(
-      '/api/activities',
+      'https://todo.api.devcode.gethired.id/activity-groups',
       body,
     );
 
-    if (status === 200) {
+    if (status === 201) {
       const { id, title, created_at } = newActivity;
       dispatch(addActivity({ id, title, created_at }));
     }

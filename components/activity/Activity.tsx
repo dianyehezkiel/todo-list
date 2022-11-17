@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { format } from 'date-fns';
 import { useState } from 'react';
+import { BASE_URL } from '../../lib/constant';
 import { IActivity } from '../../lib/types';
 import { useGlobalState } from '../../reducer';
 import { deleteActivity } from '../../reducer/reducer';
@@ -18,7 +19,7 @@ export default function Activity({
   const [showModal, setShowModal] = useState(false);
   const [, dispatch] = useGlobalState();
   const handleDeleteActivity = async () => {
-    const { status } = await axios.delete(`/api/activities/${activity.id}`);
+    const { status } = await axios.delete(`${BASE_URL}/activity-groups/${activity.id}`);
     if (status === 200) {
       dispatch(deleteActivity(activity.id));
       setShowModal(false);
