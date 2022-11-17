@@ -4,7 +4,7 @@ import AddButton from '../components/AddButton';
 import { IActivities, INewActivity } from '../lib/types';
 import Activities from '../components/activity/Activities';
 import { useGlobalState } from '../reducer';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   addActivity,
   removeActivityTitle,
@@ -16,39 +16,39 @@ import Alert from '../components/Alert';
 export default function Home() {
   const [{ activities }, dispatch] = useGlobalState();
   const [showAlert, setShowAlert] = useState(false);
+  const fetchCallback = useCallback(async () => {
+    const params = {
+      email: EMAIL,
+    };
+    const { data: activities } = await axios.get<IActivities>(
+      `${BASE_URL}/activity-groups`,
+      { params },
+    );
+
+    dispatch(setActivities(activities.data));
+  }, [dispatch]);
+
   useEffect(() => {
-    const fetchData = async () => {
-      const params = {
-        email: EMAIL,
-      };
-      const { data: activities } = await axios.get<IActivities>(
-        `${BASE_URL}/activity-groups`,
-        { params },
-      );
+    fetchCallback();
+  }, [fetchCallback]);
 
-      dispatch(setActivities(activities.data))
-    }
-
-    fetchData();
-  }, [dispatch])
   useEffect(() => {
     dispatch(removeActivityTitle());
   }, [dispatch]);
 
   const handleAddActivity = async () => {
     const body = {
-      title: "New Activity",
-      email: "dian123@random.com",
+      title: NEW_ACTIVITY,
+      email: EMAIL,
     };
 
-    const { data: newActivity, status } = await axios.post<INewActivity>(
+    const { status } = await axios.post<INewActivity>(
       `${BASE_URL}/activity-groups`,
       body,
     );
 
     if (status === 201) {
-      const { id, title, created_at } = newActivity;
-      dispatch(addActivity({ id, title, created_at }));
+      fetchCallback();
     }
   };
 
