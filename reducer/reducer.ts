@@ -79,10 +79,10 @@ export const setActivities = (activities: IActivity[]): IAction => {
   };
 };
 
-export const setActivityId = (activityId: string): IAction => {
+export const setActivityTitle = (activityTitle: string): IAction => {
   return {
     type: EActionType.SET_ACTIVITY_TITLE,
-    payload: activityId,
+    payload: activityTitle,
   };
 };
 
