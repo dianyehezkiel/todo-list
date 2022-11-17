@@ -22,8 +22,10 @@ export default function AddTodoModal({
   activityId,
   todoId,
 }: AddTodoModalProps) {
-  const [title, setTitle] = useState(defTitle??"");
-  const [priority, setPriority] = useState(defPriority??EPriorityType.VERY_HIGH.toString());
+  const [title, setTitle] = useState(defTitle ?? '');
+  const [priority, setPriority] = useState(
+    defPriority ?? EPriorityType.VERY_HIGH.toString(),
+  );
   const [, dispatch] = useGlobalState();
 
   const handleAddTodo = async () => {
@@ -31,17 +33,26 @@ export default function AddTodoModal({
       activity_group_id: activityId,
       title,
       priority,
-    }
+    };
 
-    const { data: newTodo, status } = await axios.post<INewTodo>(`${BASE_URL}/todo-items`, body);
+    const { data: newTodo, status } = await axios.post<INewTodo>(
+      `${BASE_URL}/todo-items`,
+      body,
+    );
 
     if (status === 201) {
-      const { id, title, activity_group_id, is_active: isActive, priority } = newTodo;
+      const {
+        id,
+        title,
+        activity_group_id,
+        is_active: isActive,
+        priority,
+      } = newTodo;
       const is_active = isActive ? 1 : 0;
       dispatch(addTodo({ id, title, activity_group_id, is_active, priority }));
       onClose();
-      setPriority("very-high");
-      setTitle("")
+      setPriority('very-high');
+      setTitle('');
     }
   };
 
@@ -49,17 +60,28 @@ export default function AddTodoModal({
     const body = {
       title,
       priority,
-    }
+    };
 
-    const { data: updatedTodo, status } = await axios.patch<INewTodo>(`${BASE_URL}/todo-items/${todoId}`, body);
+    const { data: updatedTodo, status } = await axios.patch<INewTodo>(
+      `${BASE_URL}/todo-items/${todoId}`,
+      body,
+    );
 
     if (status === 200) {
-      const { id, title, activity_group_id, is_active: isActive, priority } = updatedTodo;
+      const {
+        id,
+        title,
+        activity_group_id,
+        is_active: isActive,
+        priority,
+      } = updatedTodo;
       const is_active = isActive ? 1 : 0;
-      dispatch(updateTodo({ id, title, activity_group_id, is_active, priority }));
+      dispatch(
+        updateTodo({ id, title, activity_group_id, is_active, priority }),
+      );
       onClose();
     }
-  }
+  };
 
   return show ? (
     <div className="fixed inset-0 backdrop-blur-sm flex justify-center items-center p-4 z-20">
@@ -95,10 +117,12 @@ export default function AddTodoModal({
         <div className="flex flex-col w-full p-6 md:p-7 gap-3 md:gap-3.5">
           <div className="form-control w-full">
             <label className="label">
-              <span className="label-text font-semibold uppercase text-xs md:text-sm">Nama List Item</span>
+              <span className="label-text font-semibold uppercase text-xs md:text-sm">
+                Nama List Item
+              </span>
             </label>
             <input
-              data-cy='modal-add-name-input'
+              data-cy="modal-add-name-input"
               defaultValue={title}
               onChange={(e) => setTitle(e.target.value)}
               type="text"
@@ -106,21 +130,59 @@ export default function AddTodoModal({
               className="input input-bordered w-full"
             />
           </div>
-          
+
           <div className="form-control w-full">
             <label className="label">
-              <span className="label-text font-semibold uppercase text-xs md:text-sm">Priority</span>
+              <span className="label-text font-semibold uppercase text-xs md:text-sm">
+                Priority
+              </span>
             </label>
-            <div data-cy='modal-add-priority-dropdown' className="dropdown w-full max-w-xs">
-            <label tabIndex={0} className="btn m-1 w-full max-w-xs justify-start btn-ghost border border-secondary-black">{priority}</label>
-            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full max-w-xs">
-              <li onClick={() => setPriority('very-high')}><a>Very-High</a></li>
-              <li onClick={() => setPriority('high')}><a>High</a></li>
-              <li onClick={() => setPriority('normal')}><a>Normal</a></li>
-              <li onClick={() => setPriority('low')}><a>Low</a></li>
-              <li onClick={() => setPriority('very-low')}><a>Very-Low</a></li>
-            </ul>
-          </div>
+            <div
+              data-cy="modal-add-priority-dropdown"
+              className="dropdown w-full max-w-xs"
+            >
+              <label
+                tabIndex={0}
+                className="btn m-1 w-full max-w-xs justify-start btn-ghost border border-secondary-black"
+              >
+                {priority}
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full max-w-xs"
+              >
+                <li
+                  data-cy="modal-add-priority-item"
+                  onClick={() => setPriority('very-high')}
+                >
+                  <a>Very-High</a>
+                </li>
+                <li
+                  data-cy="modal-add-priority-item"
+                  onClick={() => setPriority('high')}
+                >
+                  <a>High</a>
+                </li>
+                <li
+                  data-cy="modal-add-priority-item"
+                  onClick={() => setPriority('normal')}
+                >
+                  <a>Normal</a>
+                </li>
+                <li
+                  data-cy="modal-add-priority-item"
+                  onClick={() => setPriority('low')}
+                >
+                  <a>Low</a>
+                </li>
+                <li
+                  data-cy="modal-add-priority-item"
+                  onClick={() => setPriority('very-low')}
+                >
+                  <a>Very-Low</a>
+                </li>
+              </ul>
+            </div>
             {/* <select data-cy='modal-add-priority-dropdown' defaultValue={priority} onChange={(e) => setPriority(e.target.value)} className="select select-bordered">
               <option data-cy='modal-add-priority-item' value={EPriorityType.VERY_HIGH}>Very High</option>
               <option data-cy='modal-add-priority-item' value={EPriorityType.HIGH}>High</option>
