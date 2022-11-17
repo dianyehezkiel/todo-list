@@ -37,8 +37,8 @@ export default function Home() {
 
   const handleAddActivity = async () => {
     const body = {
-      title: NEW_ACTIVITY,
-      email: EMAIL,
+      title: "New Activity",
+      email: "dian123@random.com",
     };
 
     const { data: newActivity, status } = await axios.post<INewActivity>(

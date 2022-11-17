@@ -111,7 +111,7 @@ export default function AddTodoModal({
             <label className="label">
               <span className="label-text font-semibold uppercase text-xs md:text-sm">Priority</span>
             </label>
-            <div className="dropdown w-full max-w-xs">
+            <div data-cy='modal-add-priority-dropdown' className="dropdown w-full max-w-xs">
             <label tabIndex={0} className="btn m-1 w-full max-w-xs justify-start btn-ghost border border-secondary-black">{priority}</label>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full max-w-xs">
               <li onClick={() => setPriority('very-high')}><a>Very-High</a></li>
