@@ -9,6 +9,7 @@ import EditableText from '../../components/EditableText';
 import SortButton from '../../components/SortButton';
 import TodoEmptyState from '../../components/todo/TodoEmptyState';
 import Todos from '../../components/todo/Todos';
+import { BASE_URL } from '../../lib/constant';
 import {
   IActivityTodos,
   ITodo,
@@ -26,7 +27,7 @@ export default function ActivityDetail() {
       const { id } = router.query;
 
       const { data: activity } = await axios.get<IActivityTodos>(
-        `https://todo.api.devcode.gethired.id/activity-groups/${id}`,
+        `${BASE_URL}/activity-groups/${id}`,
       );
       dispatch(setTodos(activity.todo_items));
       dispatch(setActivityTitle(activity.title));

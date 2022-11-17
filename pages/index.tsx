@@ -10,7 +10,7 @@ import {
   removeActivityTitle,
   setActivities,
 } from '../reducer/reducer';
-import { EMAIL, NEW_ACTIVITY } from '../lib/constant';
+import { BASE_URL, EMAIL, NEW_ACTIVITY } from '../lib/constant';
 import Alert from '../components/Alert';
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
         email: EMAIL,
       };
       const { data: activities } = await axios.get<IActivities>(
-        'https://todo.api.devcode.gethired.id/activity-groups',
+        `${BASE_URL}/activity-groups`,
         { params },
       );
 
@@ -42,7 +42,7 @@ export default function Home() {
     };
 
     const { data: newActivity, status } = await axios.post<INewActivity>(
-      'https://todo.api.devcode.gethired.id/activity-groups',
+      `${BASE_URL}/activity-groups`,
       body,
     );
 
